@@ -1,0 +1,21 @@
+FROM        public.ecr.aws/docker/library/python:3.10
+
+# ENV
+ENV         LANG C.UTF-8
+ENV         PYTHONUNBUFFERED 1
+ENV         DJANGO_SETTINGS_MODULE config.settings.dev
+ARG         AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+ARG         AWS_REGION
+
+RUN         apt-get update && apt-get install ffmpeg libsm6 libxext6 nginx  -y
+COPY        requirements.txt /app/requirements.txt
+RUN         pip install -r /app/requirements.txt
+RUN         pip install --no-cache-dir awscli
+COPY        . /app
+
+# manage.py
+WORKDIR     /app
+CMD  python manage.py migrate
+CMD  gunicorn config.wsgi:application -c gunicorn.config.py --bind 0.0.0.0:8000
+
+EXPOSE      80
