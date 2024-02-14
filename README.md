@@ -1,5 +1,6 @@
-# toy-shop
+# Toy-shop
 
+- python 3.10, django 4.0, drf 3.14
 - User, Item, Order 앱으로 구성된 온라인 샵 토이 프로젝트
 
 ### Libraries
@@ -15,7 +16,7 @@
 
 ## 개발 공통 내용
   - db 식별 id, 외부 식별 uuid 사용(product, category 제외)
-  - 모든 관계 옵션은 on_delete=DO_NOTHING으로 통일(safedelete 모델 적용)
+  - 모든 관계 옵션은 `on_delete=DO_NOTHING`으로 통일(safedelete 모델 적용)
   - serializer 분리를 위한 generics 오버라이딩([commons.generics](https://github.com/navill/toy-shop/blob/main/commons/views/generics.py), [commons.mixins](https://github.com/navill/toy-shop/blob/main/commons/views/mixins.py)): request & response serializer 분리
     - 서로 다른 요청/응답 형태
     - API 문서 자동화
