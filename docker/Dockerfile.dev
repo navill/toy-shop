@@ -16,6 +16,6 @@ COPY        . /app
 # manage.py
 WORKDIR     /app
 CMD  python manage.py migrate
-CMD  gunicorn config.wsgi:application -c gunicorn.config.py --bind unix:/tmp/gunicorn.sock
+CMD  gunicorn config.wsgi:application -c gunicorn.config.py --bind 0.0.0.0:00
 
 EXPOSE      80
