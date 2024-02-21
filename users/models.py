@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser, UserManager as _UserManager
 from django.db import models
 from safedelete.managers import SafeDeleteManager
 
-from commons.deidentifications import pi_masker, pi_cipher
 from commons.models import CommonModel
 from users.mixins import DeidentificationMixin
 
@@ -22,9 +21,9 @@ class UserManager(SafeDeleteManager, _UserManager):
 
 class User(DeidentificationMixin, CommonModel, AbstractUser):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
-    ci = models.BinaryField(unique=True)
-    email = models.BinaryField(unique=True)
-    hashed_email = models.BinaryField(unique=True)
+    ci = models.BinaryField()
+    email = models.BinaryField()
+    hashed_email = models.BinaryField()
     username = models.BinaryField()
 
     nickname = models.CharField(max_length=20, unique=True)

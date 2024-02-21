@@ -17,7 +17,7 @@ def health_check(request):
 
 
 urlpatterns = [
-    path("healthcheck/", health_check, name="healthcheck"),
+    path("healthcheck", health_check, name="healthcheck"),
     path("users/", include("users.urls")),
     path("items/", include("items.urls")),
     path("orders/", include("orders.urls")),

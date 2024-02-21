@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
+from commons.secret_manager import get_secret
 from .base import *
 
 load_dotenv()
@@ -10,27 +11,29 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 PERSONAL_INFO_FERNET_KEY = b'IcOjQqKvv2UtU_M2a2HqfgcuvD-ThJ1SlG7Uab9QOYk='
 
+secret = get_secret()
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': secret["dbname"],
+        'USER': secret["username"],
+        'PASSWORD': secret["password"],
+        'HOST': secret["host"],
+        'PORT': secret["port"],
+    }
+}
+
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.getenv("DB_NAME"),
-#         'USER': os.getenv("DB_USER"),
-#         'PASSWORD': os.getenv("DB_PASSWORD"),
-#         'HOST': os.getenv("DB_HOST"),
-#         'PORT': os.getenv("DB_PORT")
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     },
+#     'slave': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'slave': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 DATABASE_ROUTERS = ["commons.router.DatabaseRouter"]
 
 CACHES = {
