@@ -1,25 +1,19 @@
-import os
-
-from dotenv import load_dotenv
-
-from commons.secret_manager import get_secret
+from commons.secret_manager import secret_keys, db_secret_keys
 from .base import *
 
 load_dotenv()
-
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-PERSONAL_INFO_FERNET_KEY = b'IcOjQqKvv2UtU_M2a2HqfgcuvD-ThJ1SlG7Uab9QOYk='
+PERSONAL_INFO_FERNET_KEY = secret_keys.get("FERNET_KEY", os.getenv("FERNET_KEY"))
 
-secret = get_secret()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': secret["dbname"],
-        'USER': secret["username"],
-        'PASSWORD': secret["password"],
-        'HOST': secret["host"],
-        'PORT': secret["port"],
+        'NAME': db_secret_keys.get("dbname", os.getenv("NAME")),
+        'USER': db_secret_keys.get("username", os.getenv("USERNAME")),
+        'PASSWORD': db_secret_keys.get("password", os.getenv("PASSWORD")),
+        'HOST': db_secret_keys.get("host", os.getenv("HOST")),
+        'PORT': db_secret_keys.get("port", os.getenv("PORT")),
     }
 }
 

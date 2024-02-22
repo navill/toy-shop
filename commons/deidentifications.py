@@ -67,7 +67,7 @@ class PersonalInfoMasker:
 class PersonalInfoHasher:
     def hashed_data(self, value: str) -> Optional[bytes]:
         if value:
-            return hashlib.new("sha256", value.encode("utf-8")).digest()
+            return bytes(hashlib.new("sha256", value.encode("utf-8")).hexdigest().encode())
         else:
             return None
 

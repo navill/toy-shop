@@ -20,7 +20,8 @@ def test_제품생성(authenticated_client, category_set):
         "category": category.uuid,
         "name": "test_item",
         "content": "test_content",
-        "quantity": 100,
+        "stock": 100,
+        "initial_stock": 1000,
         "price": 100_000,
         "selling": True
     }
@@ -43,8 +44,8 @@ def test_제품_수정(authenticated_client, category_set, product_set):
         "category": other_category.uuid,
         "name": "update_name",
         "content": "update_content",
-        "quantity": 100,
-        "initial_quantity": 100,
+        "stock": 100,
+        "initial_stock": 100,
         "price": 100_000
     }
     # when

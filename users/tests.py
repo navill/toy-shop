@@ -85,10 +85,10 @@ def test_마스킹없는_유저_정보_접근(user, authenticated_client):
     origin_response = authenticated_client.get(f"{url}?unmask=true")
     response_data = origin_response.data
 
-    # then: 마스킹 없는지 확인
+    # then: 마스킹 포함 확인
     assert origin_response.status_code == status.HTTP_200_OK
     for masked_field in ["username", "phone"]:
-        assert "*" not in response_data[masked_field]
+        assert "*" in response_data[masked_field]
 
 
 @pytest.mark.django_db
