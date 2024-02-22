@@ -9,11 +9,11 @@ PERSONAL_INFO_FERNET_KEY = secret_keys.get("FERNET_KEY", os.getenv("FERNET_KEY")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': db_secret_keys.get("dbname", os.getenv("NAME")),
-        'USER': db_secret_keys.get("username", os.getenv("USERNAME")),
-        'PASSWORD': db_secret_keys.get("password", os.getenv("PASSWORD")),
-        'HOST': db_secret_keys.get("host", os.getenv("HOST")),
-        'PORT': db_secret_keys.get("port", os.getenv("PORT")),
+        'NAME': db_secret_keys.get("NAME", os.getenv("NAME")),
+        'USER': db_secret_keys.get("USERNAME", os.getenv("USERNAME")),
+        'PASSWORD': db_secret_keys.get("PASSWORD", os.getenv("PASSWORD")),
+        'HOST': db_secret_keys.get("HOST", os.getenv("HOST")),
+        'PORT': db_secret_keys.get("PORT", os.getenv("PORT")),
     }
 }
 
