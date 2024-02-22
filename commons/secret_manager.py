@@ -26,5 +26,5 @@ def get_secret(secret_name):
     return json.loads(get_secret_value_response)
 
 
-db_secret_keys = get_secret("toy/navill/mysql")
+db_secret_keys = get_secret("toy/navill/rds")
 secret_keys = get_secret("toy/navill/secret")
