@@ -1,6 +1,29 @@
 # Toy-shop
 
-- python 3.10, django 4.0, drf 3.14
+
+
+## Infrastructure(AWS)
+
+<img width="1346" alt="스크린샷 2024-02-23 08 49 18" src="https://github.com/navill/toy-shop/assets/25294465/7e0e7efc-ced7-4eab-8e96-16b4db43b7b8">
+
+- Available Zone: ap-northeast-2a, ap-northeast-2c
+- ECS: 서비스 컨테이너 구축
+  - ECS Cluster
+    - EC2: Blue/Green 배포 시 최소한의 네트워크(ENI) 수를 충족시키기 위해 t2.small 사용
+  - CodeDeploy: 서비스 배포(수동)
+- CloudFormation: 반복적으로 자주 사용되는 서비스(네트워크 구성) 구축
+
+- Secret manager: RDS 및 어플리케이션 키값 보관
+- Network
+  - Ingress ALB: 외부 요청 전달
+  - Internal ALB: 서비스 컨테이너 라우팅(테스트 컨테이너 포함)
+  - Interface Endpoint(Egress): AWS 서비스 요청(PrivateLink). 이미지 외에 ECS(ecs, telemetry, agent) 서비스도 포함
+
+
+
+## Application
+
+- Application: python 3.10, django 4.0, drf 3.14
 - User, Item, Order 앱으로 구성된 온라인 샵 토이 프로젝트
 
 ### Libraries
